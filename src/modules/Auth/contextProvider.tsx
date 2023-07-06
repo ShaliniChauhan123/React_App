@@ -1,34 +1,24 @@
-import { createRoot } from "react-dom/client";
-import "./index.css";
-import App from "./App";
-import { ThemeProvider } from "@mui/material/styles";
-
-import { theme } from "./utils/theme.ts";
-import AppQueryClientProvider from "./context/queryClient.tsx";
-import "../src/styles/globals.css";
-import { BrowserRouter as Router } from "react-router-dom";
-import history from "./utils/history.ts";
 import { useCallback, useEffect, useRef } from "react";
 import { Auth0Provider, useAuth0 } from "@auth0/auth0-react";
 import styled from "@emotion/styled";
 import {
   getAuthenticationState,
   removeAuthenticationState,
-} from "./modules/Auth/index.ts";
-import { hasAuthParams } from "./modules/Auth/utils.ts";
+} from "../../modules/Auth/utils.ts";
+import { hasAuthParams } from "../../modules/Auth/utils.ts";
 import axios from "axios";
-import AuthInitialize from "./modules/Auth/components/AuthInitialize/index.tsx";
-import config from "./app.config.ts";
-import { postLogout } from "./utils/utils.ts";
+import { PROVIDER_CONFIG, ProviderProps, ROUTER_AFTER_AUTH } from "./config.ts";
+import AuthInitialize from "./components/AuthInitialize/index.tsx";
+import config from "../../app.config.ts";
+import { postLogout } from "../../utils/utils.ts";
 import { useNavigate } from "react-router-dom";
 import React from "react";
-import { ROUTER_AFTER_AUTH } from "./modules/Auth/config.ts";
 
 const TransitionWrapper = styled.div`
   transition: 0.5s;
 `;
 
-const AuthWrapper = ({ children }) => {
+const AuthWrapper = ({ children }: ProviderProps) => {
   const { isAuthenticated, loginWithRedirect, handleRedirectCallback, logout } =
     useAuth0();
 
@@ -108,40 +98,12 @@ const AuthWrapper = ({ children }) => {
   );
 };
 
-export const providerConfig = {
-  domain: config.auth0.domain,
-  clientId: config.auth0.clientId,
-  cacheLocation: "localstorage",
-  skipRedirectCallback: true,
-  authorizationParams: {
-    scope: config.auth0.scope,
-    redirect_uri: config.auth0.redirectUri,
-    audience: config.auth0.audience,
-  },
-};
-const root = createRoot(document.getElementById("root"));
-root.render(
-  <Router history={history}>
-    <Auth0Provider {...providerConfig}>
+export default function Auth0WrapProvider({ children }: ProviderProps) {
+  return (
+    <Auth0Provider {...PROVIDER_CONFIG}>
       <AuthInitialize>
-        <AuthWrapper>
-          <ThemeProvider theme={theme}>
-            <AppQueryClientProvider>
-              {/* <head> */}
-              <title>Prolaio Care Team</title>
-              <meta name="description" content="Prolaio Care Team"></meta>
-              {/* </head> */}
-
-              <App />
-            </AppQueryClientProvider>
-          </ThemeProvider>
-        </AuthWrapper>
+        <AuthWrapper>{children}</AuthWrapper>
       </AuthInitialize>
     </Auth0Provider>
-  </Router>
-);
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-//serviceWorker.unregister();
+  );
+}

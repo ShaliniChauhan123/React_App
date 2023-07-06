@@ -1,0 +1,143 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+    Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+:root {
+  --container-padding: 15px;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+
+  body {
+    color: black;
+    background: white;
+  }
+}
+
+.bgGray {
+  background: #efefef;
+  /*radial-gradient(
+    circle at 18.7% 37.8%,
+    rgb(250, 250, 250) 0%,
+    rgb(225, 234, 238) 90%
+  );*/
+  border-radius: 10px;
+}
+
+.borderGray {
+  border: 1px solid #e1eaee;
+  border-radius: 10px;
+}
+
+.patient-name {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.component-titles {
+  width: 887px;
+  height: 32px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 32px;
+  color: #1a1a1a;
+  flex: none;
+  order: 0;
+  flex-grow: 1;
+}
+
+.component-titles-1 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 40px;
+  color: #1a1a1a;
+}
+
+.component-subtitles {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #000000;
+}
+
+/* Disable fusion chart trial label*/
+svg > g[class^="raphael-group"] {
+  opacity: 0;
+  display: none;
+}
+
+svg > g[class*="parentgroup"] {
+  display: inherit;
+  opacity: 1;
+}
+
+.component-titles-2 {
+  display: flex;
+  align-items: center;
+}
+
+.version {
+  font-size: 10px;
+  font-family: "Lato", sans-serif;
+  margin-top: 20px;
+  color: rgb(70, 70, 70);
+}
+iframe {
+  width: 100%;
+  height: 100vh;
+}
+.dialog-heading {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 22px;
+  max-width: 197px;
+}
+.monitoring-table-cell > td {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 10px;
+  order: 2;
+  align-self: stretch;
+}
+.monitoring-table-cell1 {
+  color: #2463eb;
+  line-height: 20px !important;
+}
+.monitoring-table-cell2 {
+  font-weight: 700 !important;
+}
+.new-button {
+  height: 30px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 30px;
+  display: flex;
+  align-items: center;
+  color: rgba(26, 26, 26, 0.7);
+}

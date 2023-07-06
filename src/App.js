@@ -1,25 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Route, Routes } from "react-router-dom";
 
-function App() {
+import { useAuth0 } from "@auth0/auth0-react";
+import PatientTable from "./components/PatientTable/index.tsx";
+const App = () => {
+  const { error } = useAuth0();
+
+  if (error) {
+    return <div>Oops... {error.message}</div>;
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div id="app" className="d-flex flex-column h-100">
+      <Routes>
+        <Route path="/" exact element={<PatientTable />} />
+      </Routes>
     </div>
   );
-}
+};
 
 export default App;
